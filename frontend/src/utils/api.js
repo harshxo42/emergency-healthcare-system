@@ -11,9 +11,9 @@ const handleResponse = async (response) => {
 export const api = {
   // Patients
   patients: {
-    getAll: () => fetch(`${API_BASE}/patients`).then(handleResponse),
-    getHistory: (patientId) => fetch(`${API_BASE}/patients/${patientId}`).then(handleResponse),
-    create: (patientData) => fetch(`${API_BASE}/patients`, {
+    getAll: () => fetch(`${API_BASE}/api/api/api/api/api/api/api/api/patients`).then(handleResponse),
+    getHistory: (patientId) => fetch(`${API_BASE}/api/api/api/api/api/api/api/api/patients/${patientId}`).then(handleResponse),
+    create: (patientData) => fetch(`${API_BASE}/api/api/api/api/api/api/api/api/patients`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(patientData)
@@ -22,14 +22,14 @@ export const api = {
 
   // Hospitals
   hospitals: {
-    getAll: () => fetch(`${API_BASE}/hospitals`).then(handleResponse),
-    getNearest: (x, y) => fetch(`${API_BASE}/hospitals/nearest?x=${x}&y=${y}`).then(handleResponse)
+    getAll: () => fetch(`${API_BASE}/api/api/api/api/api/api/api/api/hospitals`).then(handleResponse),
+    getNearest: (x, y) => fetch(`${API_BASE}/api/api/api/api/api/api/api/api/hospitals/nearest?x=${x}&y=${y}`).then(handleResponse)
   },
 
   // Ambulances
   ambulances: {
-    getAll: () => fetch(`${API_BASE}/ambulances`).then(handleResponse),
-    update: (id, updateData) => fetch(`${API_BASE}/ambulances/${id}`, {
+    getAll: () => fetch(`${API_BASE}/api/api/api/api/api/api/api/api/ambulances`).then(handleResponse),
+    update: (id, updateData) => fetch(`${API_BASE}/api/api/api/api/api/api/api/api/ambulances/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updateData)
@@ -38,19 +38,19 @@ export const api = {
 
   // Emergencies
   emergencies: {
-    getAll: () => fetch(`${API_BASE}/emergencies`).then(handleResponse),
-    getQueue: () => fetch(`${API_BASE}/emergencies/queue`).then(handleResponse),
-    create: (requestData) => fetch(`${API_BASE}/emergencies`, {
+    getAll: () => fetch(`${API_BASE}/api/api/api/api/api/api/api/api/emergencies`).then(handleResponse),
+    getQueue: () => fetch(`${API_BASE}/api/api/api/api/api/api/api/api/emergencies/queue`).then(handleResponse),
+    create: (requestData) => fetch(`${API_BASE}/api/api/api/api/api/api/api/api/emergencies`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestData)
     }).then(handleResponse),
-    dispatch: (emergencyId) => fetch(`${API_BASE}/emergencies/dispatch`, {
+    dispatch: (emergencyId) => fetch(`${API_BASE}/api/api/api/api/api/api/api/api/emergencies/dispatch`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(emergencyId ? { emergencyId } : {})
     }).then(handleResponse),
-    resolve: (id) => fetch(`${API_BASE}/emergencies/${id}/resolve`, {
+    resolve: (id) => fetch(`${API_BASE}/api/api/api/api/api/api/api/emergencies/${id}/resolve`, {
       method: 'POST'
     }).then(handleResponse)
   }
