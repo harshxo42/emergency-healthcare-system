@@ -1,4 +1,4 @@
-const API_BASE = 'https://emergency-healthcare-system.onrender.com';
+const API_URL = "https://emergency-healthcare-system.onrender.com";
 
 const handleResponse = async (response) => {
   const data = await response.json();
