@@ -26,7 +26,9 @@ app.get('/', (req, res) => {
   res.status(200).json({
     success: true,
     message: 'Welcome to the Emergency Healthcare API & Dispatch Operations Center Server.',
-    databaseMode: global.dbConnected ? 'MongoDB' : 'In-Memory High-Performance Fallback'
+    databaseMode: global.dbConnected
+      ? 'MongoDB'
+      : 'In-Memory High-Performance Fallback'
   });
 });
 
@@ -36,7 +38,7 @@ app.use('/api/hospitals', hospitalRoutes);
 app.use('/api/ambulances', ambulanceRoutes);
 app.use('/api/emergencies', emergencyRoutes);
 
-// Catch-all route for unknown API endpoints
+// 404 Route
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -54,24 +56,42 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start Server & Initialize Services
+// =========================
+// START SERVER
+// =========================
+
 const startServer = async () => {
-  // Connect to Database
-  await connectDB();
-  
-  // Seed Database (MongoDB or In-Memory stores)
-  await seedDB();
-  
-  // Load any pending database emergencies into the Priority Queue
-  await initializeQueue();
-  
-  app.listen(PORT, () => {
-    console.log(`=============================================================`);
-    console.log(`🚀 Server running on port ${PORT}`);
-    console.log(`🛠️  Database Mode: ${global.dbConnected ? 'MongoDB (Atlas/Local)' : 'In-Memory Fallback'}`);
-    console.log(`🩺 System operations ready for emergency dispatcher signals.`);
-    console.log(`=============================================================`);
-  });
+  try {
+    console.log("✅ Step 1: Connecting Database...");
+    await connectDB();
+
+    console.log("✅ Step 2: Seeding Database...");
+    await seedDB();
+
+    console.log("✅ Step 3: Initializing Priority Queue...");
+    await initializeQueue();
+
+    console.log("✅ Step 4: Starting Express Server...");
+
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log("=============================================================");
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(
+        `🛠️ Database Mode: ${
+          global.dbConnected
+            ? 'MongoDB (Atlas)'
+            : 'In-Memory High-Performance Fallback'
+        }`
+      );
+      console.log("🩺 Emergency Healthcare Backend is LIVE");
+      console.log("=============================================================");
+    });
+
+  } catch (error) {
+    console.error("❌ SERVER STARTUP ERROR");
+    console.error(error);
+    process.exit(1);
+  }
 };
 
 startServer();
