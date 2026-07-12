@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://emergency-healthcare-system.onrender.com';
 
 const handleResponse = async (response) => {
   const data = await response.json();
